@@ -1,0 +1,10 @@
+Flask
+requests
+pymongo
+
+# local metadata extraction
+epub_meta
+pdfrw
+
+# file-type recognition
+python-magic
