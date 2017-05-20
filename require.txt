@@ -8,3 +8,6 @@ pdfrw
 
 # file-type recognition
 python-magic
+
+# image handling
+Pillow

@@ -8,12 +8,22 @@ import re
 # for web queries
 import requests
 
+# image handling
+from PIL import Image
+from io import BytesIO
+
 # file-type recognition
 import magic
 
 # local metadata extraction
 from epub_meta import get_epub_metadata, get_epub_opf_xml, EPubException
 from pdfrw import PdfReader
+
+# scanning for paths
+import glob
+
+# END IMPORTS
+#############
 
 def main():
 	test_path_1 = "epub/abriefhistory.epub"
@@ -22,10 +32,21 @@ def main():
 	#print(easy_scan("local", test_path_2))
 	#print("TESTING REMOTE EXTRACTION...")
 	#print(easy_scan("remote", easy_scan("local", test_path_2)))
-	print("TESTING COMPLETE EXTRACTION...")
-	print(easy_scan("complete", test_path_2))
+	#print("TESTING COMPLETE EXTRACTION...")
+	#print(easy_scan("complete", test_path_2))
+	##print("TESTING FOLDER SCAN...")
+	print(folder_scan("/storage"))
 	
 
+# takes a path to a folder and returns all PDF and ePub file paths inside
+# WORKING examples: "storage", "storage/"
+# NOT WORKING examples (gives empty list): "/storage", "/storage/"
+def folder_scan(path):
+	file_types = ('*.pdf', '*.epub')
+	path_list = []
+	for extension in file_types:
+		path_list.extend(glob.glob(os.path.join(path, extension)))
+	return path_list
 
 def easy_scan(operator, aux):
 	# operators
@@ -115,7 +136,7 @@ def remote_scanner(local_dict):
 	search_params = dict([("q", local_dict["title"])])
 
 	# perform lookup
-	r = requests.get(url=gbooks_URI, params=search_params)
+	r = requests.get(gbooks_URI, params=search_params)
 	search_data = r.json()
 
 	# construct and return the remote_dict
@@ -123,7 +144,13 @@ def remote_scanner(local_dict):
 	author = search_data["items"][0]["volumeInfo"]["authors"]
 	description = search_data["items"][0]["volumeInfo"]["description"]
 	gbooksid = search_data["items"][0]["id"]
-	thumbnail = search_data["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"]
+
+	# thumbnail is trickier: we need a large image and then store it as binary (needs work!)
+	zoom_param = {"zoom" : "0"}
+	thumbnail_link = search_data["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"]
+	thumbnail = Image.open(BytesIO(requests.get(thumbnail_link, zoom_param).content))
+
+	# return the final metadata
 	metadata = dict([("title", title), ("author", author), ("description", description), ("gbooksid", gbooksid), ("thumbnail", thumbnail)])
 	return metadata
 
