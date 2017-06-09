@@ -1,6 +1,9 @@
 Flask
+Flask-Session
+Flask-JSGlue
 requests
 pymongo
+dropbox
 
 # local metadata extraction
 epub_meta

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	
+	<title>Rumi | {% block title %}{% endblock %}</title> 
+
+	<!-- CSS -->
+    {{ JSGlue.include() }}
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+	<link rel='stylesheet prefetch' href='https://cdn.jsdelivr.net/foundation/6.2.0/foundation.min.css'>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+	<body>
+
+		<div id="main-container" class="main-container nav-effect-1">
+
+			<nav class="nav-menu nav-effect-1" id="menu-1">
+				<h2 class="">The Library</h2>
+				<ul>
+					<li><a class="" href="#">Checkout</a></li>
+					<li><a class="" href="#">Return</a></li>
+					<li><a class="" href="#">About</a></li>
+					<li><a class="" href="#">Contact</a></li>
+				</ul>
+			</nav>
+
+			<div class="main clearfix">
+
+				<!-- Header Content -->
+				<header id="header" class="page-header">
+					<div class="page-header-container row">
+
+						<!-- Logo -->
+						<div class="main-logo">
+							<a href="#" class="logo">The Library</a>
+						</div>
+
+						<div class="menu-search">
+							<!-- Main Navigation -->
+							<div class="main-navigation">
+								<a href="#">Menu</a>
+							</div>
+
+							<!-- Search -->
+							<div class="catalog-search">
+								<input class="shuffle-search input_field " type="search" autocomplete="off" value="" maxlength="128" id="input-search" />
+								<label class="input_label" for="input-search">
+									<span class="input_label-content">Search Library</span>
+									<span class="input_label-search"></span>
+								</label>
+							</div>
+
+						</div>
+					</div>
+				</header>
+
+				<!-- Main Section -->
+				<div class="page-container">
+
+					{% if get_flashed_messages() %}
+					<div class="alert alert-info" role="alert">
+						{{ get_flashed_messages() | join(" ") }}
+					</div>
+					{% endif %}
+
+					{% block main %}{% endblock %}
+
+				<!-- end Main Section -->
+				</div>
+
+
+				<!-- Footer Content -->
+				<footer id="footer" class="page-footer">
+					<div class="row footer-wrapper">
+						<div class="original-version small-12 columns"><a href="http://interactivejoe.com/book-viewer/" target="_blank"><em>Original Version can be found here.</em></a></div>
+						<div class="copyright small-12 columns">&copy; 2016 - <a href="http://interactivejoe.com/"  target="_blank">InteractiveJoe</a></div>
+					</div>
+				</footer>
+
+
+			<!-- end main clearfix -->
+			</div>
+
+            <div class="main-overlay">
+                <div class="overlay-full"></div>
+            </div>
+
+		<!-- end main container -->
+        </div>
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+<script src='https://cdn.jsdelivr.net/foundation/6.2.0/foundation.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Shuffle/4.0.0/shuffle.min.js'></script>
+<script src="{{ url_for('static', filename='main.js') }}"></script>
+<script src="{{ url_for('static', filename='style.js') }}"></script>
+</body>
+</html>

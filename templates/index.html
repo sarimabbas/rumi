@@ -1,1 +1,185 @@
-hello world
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+
+<section id="book_list">
+
+        <div class="toolbar row">
+          <div class="filter-options small-12 medium-9 columns">
+            <a href="#" class="filter-item active" data-group="all">All Collections</a>
+            <a href="#" class="filter-item" data-group="fantasy">Fantasy</a>
+            <a href="#" class="filter-item" data-group="sci-fi">Sci-Fi</a>
+            <a href="#" class="filter-item" data-group="classic">Classics</a>
+            <a href="#" class="filter-item" data-group="fairy">Fairy Tale</a>
+            <a href="#" class="filter-item" data-group="young">Young Adult</a>
+          </div>
+
+          <div class="small-12 medium-3 columns">
+            <select class="sort-options">
+            <option value="" disabled selected>Sort by</option>
+            <option value="" >Featured</option>
+            <option value="title">Alphabetical</option>
+            <option value="date-created">Published</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid-shuffle">
+          <ul id="grid" class="row">
+
+          {% for book in books %}
+          <li class="book-item small-12 medium-6 columns" data-groups='["classic"]' data-date-created='1937' data-title='Of Mice and Men' data-color='#fcc278' data-book-id="{{ book["_id"] }}">
+              <div class="bk-img">
+                <div class="bk-wrapper">
+                  <div class="bk-book bk-bookdefault">
+                    <div class="bk-front">
+                      <div class="bk-cover" style="background-image: url({{ book["remote"]["thumbnail"]|join('') }})"></div>
+                    </div>
+                    <div class="bk-back"></div>
+                    <div class="bk-left"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="item-details">
+                <h3 class="book-item_title">{{ book["remote"]["title"] }}</h3>
+                <p class="author">by {{ book["remote"]["author"]|join('') }}</p>
+                <p>{{ book["remote"]["description"]|truncate(110) }}</p>
+                <a href="#" class="button ">Details</a>
+              </div>
+
+              <div class="overlay-details">
+                <a href="#" class="close-overlay-btn">Close</a>
+                <div class="overlay-image">
+                  <img src="{{ book["remote"]["thumbnail"]|join('') }}" alt="Book Cover">
+                  <div class="back-color"></div>
+                </div>
+                <div class="overlay-desc activated">
+                  <h2 class="overlay_title">{{ book["remote"]["title"] }}</h2>
+                  <p class="author">{{ book["remote"]["author"]|join('') }}</p>
+                  <!-- <p class="published">1937</p> -->
+                  <p class="synopsis">{{ book["remote"]["description"]|truncate(400) }}</p>
+                  <a href="#" class="download button" data-book-id="{{ book["_id"] }}">Download {{ book["local"]["type"]|upper() }}</a>
+                  <a href="#" class="button preview">More about this book</a>
+                </div>
+                <div class="overlay-preview">
+                  <a href="#" class="back-preview-btn">Back</a>
+                  <h4 class="preview-title">More about this book:</h4>
+                  <div class="preview-content">
+                    <h4>Full description:</h4>
+                    <p>{{ book["remote"]["description"] }}</p><br><br>
+                  </div>
+                </div>
+              </div>
+            </li>
+            {% endfor %}
+
+            <li class="book-item small-12 medium-6 columns" data-groups='["classic"]' data-date-created='1937' data-title='Of Mice and Men' data-color='#fcc278'>
+              <div class="bk-img">
+                <div class="bk-wrapper">
+                  <div class="bk-book bk-bookdefault">
+                    <div class="bk-front">
+                      <div class="bk-cover" style="background-image: url('http://interactivejoe.com/book-viewer/assets/images/bk_1-small.jpg')"></div>
+                    </div>
+                    <div class="bk-back"></div>
+                    <div class="bk-left"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="item-details">
+                <h3 class="book-item_title">Of Mice and Men</h3>
+                <p class="author">by John Steinbeck &bull; 1937</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tellus nisi, eget pulvinar in, molestie et arcu.</p>
+                <a href="#" class="button ">Details</a>
+              </div>
+
+              <div class="overlay-details">
+                <a href="#" class="close-overlay-btn">Close</a>
+                <div class="overlay-image">
+                  <img src="http://interactivejoe.com/book-viewer/assets/images/bk_1-large.jpg" alt="Book Cover">
+                  <div class="back-color"></div>
+                </div>
+                <div class="overlay-desc activated">
+                  <h2 class="overlay_title">Of Mice and Men</h2>
+                  <p class="author">by John Steinbeck</p>
+                  <p class="published">1937</p>
+                  <p class="synopsis">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam luctus convallis sem. Nunc sed tristique augue. Aenean at nulla vel lacus volutpat bibendum vitae ut nibh. Aliquam eu metus et purus rutrum malesuada. Aenean in auctor mauris,
+                    non vulputate libero. Nullam auctor, purus ut cursus convallis, lectus tellus dignissim lectus, id tempor ipsum leo ut nulla. Vestibulum vitae elit erat.</p>
+                  <a href="#" class="button preview">Preview</a>
+                </div>
+                <div class="overlay-preview">
+                  <a href="#" class="back-preview-btn">Back</a>
+                  <h4 class="preview-title">Preview</h4>
+                  <div class="preview-content">
+                    <h5>Chapter 1</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam luctus convallis sem. Nunc sed tristique augue. Aenean at nulla vel lacus volutpat bibendum vitae ut nibh. Aliquam eu metus et purus rutrum malesuada. Aenean in auctor
+                      mauris, non vulputate libero. Nullam auctor, purus ut cursus convallis, lectus tellus dignissim lectus, id tempor ipsum leo ut nulla. Vestibulum vitae elit erat.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam luctus convallis sem. Nunc sed tristique augue. Aenean at nulla vel lacus volutpat bibendum vitae ut nibh. Aliquam eu metus et purus rutrum malesuada. Aenean in auctor
+                      mauris, non vulputate libero. Nullam auctor, purus ut cursus convallis, lectus tellus dignissim lectus, id tempor ipsum leo ut nulla. Vestibulum vitae elit erat.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam luctus convallis sem. Nunc sed tristique augue. Aenean at nulla vel lacus volutpat bibendum vitae ut nibh. Aliquam eu metus et purus rutrum malesuada. Aenean in auctor
+                      mauris, non vulputate libero. Nullam auctor, purus ut cursus convallis, lectus tellus dignissim lectus, id tempor ipsum leo ut nulla. Vestibulum vitae elit erat.<br>&nbsp;<br>&nbsp;</p>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li class="book-item small-12 medium-6 columns" data-groups='["fantasy","young"]' data-date-created='2007' data-title="Harry Potter and the Deathly Hallows" data-color='#b06010'>
+              <div class="bk-img">
+                <div class="bk-wrapper">
+                  <div class="bk-book bk-bookdefault">
+                    <div class="bk-front">
+                      <div class="bk-cover" style="background-image: url('http://interactivejoe.com/book-viewer/assets/images/bk_19-small.jpg')"></div>
+                    </div>
+                    <div class="bk-back"></div>
+                    <div class="bk-left"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="item-details">
+                <h3 class="book-item_title">Harry Potter and the Deathly Hallows</h3>
+                <p class="author">by J.K. Rowling &bull; 2007</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tellus nisi, eget pulvinar in, molestie et arcu.</p>
+                <a href="#" class="button ">Details</a>
+              </div>
+
+              <div class="overlay-details">
+                <a href="#" class="close-overlay-btn">Close</a>
+                <div class="overlay-image">
+                  <img src="http://interactivejoe.com/book-viewer/assets/images/bk_19-large.jpg" alt="Book Cover">
+                  <div class="back-color"></div>
+                </div>
+                <div class="overlay-desc activated">
+                  <h2 class="overlay_title">Harry Potter and the Deathly Hallows</h2>
+                  <p class="author">by J.K. Rowling</p>
+                  <p class="published">2007</p>
+                  <p class="synopsis">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam luctus convallis sem. Nunc sed tristique augue. Aenean at nulla vel lacus volutpat bibendum vitae ut nibh. Aliquam eu metus et purus rutrum malesuada. Aenean in auctor mauris,
+                    non vulputate libero. Nullam auctor, purus ut cursus convallis, lectus tellus dignissim lectus, id tempor ipsum leo ut nulla. Vestibulum vitae elit erat.</p>
+                  <a href="#" class="button preview">Preview</a>
+                </div>
+                <div class="overlay-preview">
+                  <a href="#" class="back-preview-btn">Back</a>
+                  <h4 class="preview-title">Preview</h4>
+                  <div class="preview-content">
+                    <h5>Chapter 1</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam luctus convallis sem. Nunc sed tristique augue. Aenean at nulla vel lacus volutpat bibendum vitae ut nibh. Aliquam eu metus et purus rutrum malesuada. Aenean in auctor
+                      mauris, non vulputate libero. Nullam auctor, purus ut cursus convallis, lectus tellus dignissim lectus, id tempor ipsum leo ut nulla. Vestibulum vitae elit erat.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam luctus convallis sem. Nunc sed tristique augue. Aenean at nulla vel lacus volutpat bibendum vitae ut nibh. Aliquam eu metus et purus rutrum malesuada. Aenean in auctor
+                      mauris, non vulputate libero. Nullam auctor, purus ut cursus convallis, lectus tellus dignissim lectus, id tempor ipsum leo ut nulla. Vestibulum vitae elit erat.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam luctus convallis sem. Nunc sed tristique augue. Aenean at nulla vel lacus volutpat bibendum vitae ut nibh. Aliquam eu metus et purus rutrum malesuada. Aenean in auctor
+                      mauris, non vulputate libero. Nullam auctor, purus ut cursus convallis, lectus tellus dignissim lectus, id tempor ipsum leo ut nulla. Vestibulum vitae elit erat.<br>&nbsp;<br>&nbsp;</p>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+
+      </section>
+
+<p>{{ script }}</p>
+
+{% endblock %}
