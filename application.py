@@ -19,6 +19,7 @@ from pymongo import MongoClient
 
 # configure application
 app = Flask(__name__)
+app.config['DEBUG'] = True
 JSGlue(app)
 #app.config['DEBUG'] = True
 
@@ -51,8 +52,6 @@ Session(app)
 
 @app.route("/")
 def index():
-
-	hack_script = "<script type='text/javascript'>$('.download').on('click', function() { var download_id = $(this).data('book-id'); console.log(download_id); });</script>"
 	
 	test_path_1 = "storage/abriefhistory.epub"
 	test_path_2 = "storage/deathlyhallows.pdf"
@@ -64,7 +63,7 @@ def index():
 	#print(books_insertion_id)
 	
 	books = book_retrieve()
-	return render_template("index.html", books=books, script=hack_script)
+	return render_template("index.html", books=books)
 
 
 # testing to do:

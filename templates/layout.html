@@ -7,6 +7,7 @@
 
 	<!-- CSS -->
     {{ JSGlue.include() }}
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 	<link rel='stylesheet prefetch' href='https://cdn.jsdelivr.net/foundation/6.2.0/foundation.min.css'>
 	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
@@ -24,16 +25,6 @@
 
 		<div id="main-container" class="main-container nav-effect-1">
 
-			<nav class="nav-menu nav-effect-1" id="menu-1">
-				<h2 class="">The Library</h2>
-				<ul>
-					<li><a class="" href="#">Checkout</a></li>
-					<li><a class="" href="#">Return</a></li>
-					<li><a class="" href="#">About</a></li>
-					<li><a class="" href="#">Contact</a></li>
-				</ul>
-			</nav>
-
 			<div class="main clearfix">
 
 				<!-- Header Content -->
@@ -42,14 +33,10 @@
 
 						<!-- Logo -->
 						<div class="main-logo">
-							<a href="#" class="logo">The Library</a>
+							<h2>Rumi</h2>
 						</div>
 
 						<div class="menu-search">
-							<!-- Main Navigation -->
-							<div class="main-navigation">
-								<a href="#">Menu</a>
-							</div>
 
 							<!-- Search -->
 							<div class="catalog-search">
@@ -82,8 +69,8 @@
 				<!-- Footer Content -->
 				<footer id="footer" class="page-footer">
 					<div class="row footer-wrapper">
-						<div class="original-version small-12 columns"><a href="http://interactivejoe.com/book-viewer/" target="_blank"><em>Original Version can be found here.</em></a></div>
-						<div class="copyright small-12 columns">&copy; 2016 - <a href="http://interactivejoe.com/"  target="_blank">InteractiveJoe</a></div>
+						<div class="original-version small-12 columns">User interface by <a href="http://interactivejoe.com/book-viewer/" target="_blank"><em>Interactive Joe.</em></a></div>
+						<div class="copyright small-12 columns">&copy; 2017 - Rumi</a></div>
 					</div>
 				</footer>
 
@@ -101,7 +88,7 @@
 <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
 <script src='https://cdn.jsdelivr.net/foundation/6.2.0/foundation.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/Shuffle/4.0.0/shuffle.min.js'></script>
-<script src="{{ url_for('static', filename='main.js') }}"></script>
+<script>window.jQuery || document.write('<script src="{{ url_for('static', filename='main.js') }}"></script>')</script>
 <script src="{{ url_for('static', filename='style.js') }}"></script>
 </body>
 </html>
